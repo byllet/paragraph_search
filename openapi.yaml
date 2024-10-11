@@ -1,0 +1,59 @@
+openapi: "3.0.2"
+info:
+    title: paragraph_search
+    version: "1.0"
+servers:
+    - url: http://localhost:8080/
+    
+paths:
+    /searching:
+        post:
+            description: поиск параграфа 
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                text:
+                                    type: string
+                                    required: true
+                                top_k:
+                                    type: integer
+                                    required: true
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    paragraph:
+                                        type: string
+    /indexing:
+      post:
+        desription: индексация данных 
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/components/schemas/Docs'
+            responses:
+                '200':
+                    description: OK
+
+
+components:
+    schemas:
+      Docs:
+          type: object
+          required:
+            - content
+          properties:      
+              content:
+                  type: string
