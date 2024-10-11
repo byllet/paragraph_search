@@ -40,9 +40,13 @@ paths:
             content:
                 application/json:
                     schema:
-                        type: array
-                        items:
-                            $ref: '#/components/schemas/Docs'
+                        type: object
+                        properties:
+                            docs:
+                                required: true
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Docs'
             responses:
                 '200':
                     description: OK
