@@ -1,2 +1,6 @@
 flask
 requests
+torch
+transformers
+numpy
+scikit-learn
