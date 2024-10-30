@@ -1,6 +1,4 @@
 flask
 requests
-torch
-transformers
-numpy
-scikit-learn
+sentence-transformers
+qdrant-client

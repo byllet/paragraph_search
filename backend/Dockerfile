@@ -4,14 +4,12 @@ COPY requirements.txt .
 
 RUN pip3 install --upgrade pip -r requirements.txt
 
+EXPOSE 5000
+
+RUN python -c 'from sentence_transformers import SentenceTransformer; embedder = SentenceTransformer("intfloat/multilingual-e5-large")'
+
 COPY src /backend/src
 
 WORKDIR /backend/src
-
-EXPOSE 5000
-
-COPY model /backend/model/
-
-COPY token /backend/token/
 
 CMD ["flask", "--app",  "main", "run", "--host=0.0.0.0"]
