@@ -1,7 +1,7 @@
 # paragraph_search
 
  - Что нужно для запуска?   
-    1) Должен быть установлен докер
+    1) Должен быть установлен docker compose
 
     2)  ```
         paragraph_search$ docker compose up
@@ -13,15 +13,18 @@
     ```
     curl -X POST localhost:5000/indexing \
     -H "Content-Type: application/json" \
-    -d '{"dataset_name_of_docs": [{"content" : "I sat on the bank of the river today."},
-                                {"content" : "Я сидел у реки весь день."},
-                                {"content" : "Первым в этот день дежурил Сэм, но по собственной воле к нему присоединился Арагорн. Остальные один за другим уснули. Над лощиной стремительно стала расти тишина. Ее почувствовал даже Сэм "}]}'
+    -d '{
+            "dataset_name_of_docs": [
+                {"content" : "I sat on the bank of the river today."},
+                {"content" : "In mathematics, the Riemann–Stieltjes integral is a generalization of the Riemann integral, named after Bernhard Riemann and Thomas Joannes Stieltjes"}
+            ]
+        }'
     ```
 
     - Поиск по параграфам
 
     ```
-    curl -X POST localhost:5000/search \
+    curl -X POST localhost:5000/searching \
     -H "Content-Type: application/json" \
-    -d '{"text": "some very interesting querry", "top_k": 100}'
+    -d '{"text": "integral", "top_k": 1}'
     ```

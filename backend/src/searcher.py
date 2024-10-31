@@ -17,9 +17,8 @@ class Searcher:
                     distance=models.Distance.COSINE,
                 )
             )
-            
-        self.index_ = 0
 
+        self.index_ = 0
 
     def search(self, text: str, top_k: int):
         vector = self.model.encode(text).tolist()
@@ -33,7 +32,6 @@ class Searcher:
 
         payloads = [hit.payload for hit in search_result]
         return payloads
-    
 
     def index(self, content):
         points = []
@@ -42,12 +40,14 @@ class Searcher:
 
             if 'content' not in paragraph:
                 return -1
-            
-            points.append(models.PointStruct(
-                        id=self.index_, vector=self.model.encode(paragraph['content']).tolist(), payload=paragraph
-                    )
-                )
-            
+
+            points.append(
+                models.PointStruct(
+                    id=self.index_,
+                    vector=self.model.encode(
+                        paragraph['content']).tolist(),
+                    payload=paragraph))
+
             self.index_ += 1
 
         self.qdrant_client.upload_points(
